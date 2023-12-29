@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nikki + Evan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Base styling */
+        body {
+            font-family: 'Trebuchet MS', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdfdfd; /* Off-white background */
+            color: #333;
+        }
+
+        /* Container for flex items */
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header styling */
+        .header {
+            text-align: center;
+            padding: 60px;
+            order: 1; /* Default order */
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 3.8em;
+            font-variant: small-caps;
+            letter-spacing: 0.1em;
+        }
+
+        .header h2 {
+            margin-top: 10px;
+            margin-bottom: 0px;
+            font-size: 1.3em;
+            font-weight: lighter;
+            color: #555;
+        }
+
+        /* Navigation menu */
+        .menu {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            background: #f8f8f8;
+            order: 2; /* Default order */
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        /* Style for current page in menu */
+        .menu a.current-page {
+            background-color: #e7e7e7; /* highlight for desktop */
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            background-color: #e7e7e7;
+        }
+
+        /* Main content and image */
+        .main-content {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .main-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Responsive Menu Toggle for Mobile */
+        .menu-icon {
+            display: none; /* Hide menu icon initially */
+        }
+
+        /* Image and text layout adjustments */
+        .image-text-container-one {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 20px; /* add space between the sections */
+            order: 3;
+        }
+
+        .image-text-container-one h1 {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .image-text-container-one h2 {
+            font-size: 1.1em;
+            color: #555;
+            margin: 0;
+        }
+
+        .image-text-container-one h3 {
+            font-size: 1.0em;
+            color: #555;
+            margin: 0;
+        }
+
+        /* Image and text layout adjustments */
+        .image-text-container-two {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px; /* add space between the sections */
+            order: 4;
+        }
+
+        .image-text-container-two h1 {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .image-text-container-two h2 {
+            font-size: 1.1em;
+            color: #555;
+            margin: 0;
+        }
+
+        .image-text-container-two h3 {
+            font-size: 1.0em;
+            color: #555;
+            margin: 0;
+        }
+
+        .text-left {
+            max-width: 425px;
+            margin-right: 27px;
+            text-align: right;
+        }
+
+        .text-right {
+            max-width: 425px;
+            margin-left: 27px;
+        }
+
+        .image-left img {
+            max-width: 100%; /* max width within the container */
+            height: auto; /* maintain aspect ratio */
+            display: block; /* to enable margin auto to work */
+            margin: auto; /* center the image within the container */
+            margin-right: 27px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .image-right img {
+            max-width: 100%; /* max width within the container */
+            height: auto; /* maintain aspect ratio */
+            display: block; /* to enable margin auto to work */
+            margin: auto; /* center the image within the container */
+            margin-left: 27px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .mobile-header {
+            display: none;
+        }
+
+        /* Specific max-width in pixels for larger screens */
+        @media only screen and (min-width: 768px) {
+            .image-left img, .image-right img {
+                max-width: 500px; /* or any other value that fits your design */
+            }
+        }
+
+        /* Responsive styles */
+        @media only screen and (max-width: 768px) {
+
+            /* Adjust header and sub-header for mobile */
+            .header {
+                padding: 5px;
+                display: none;
+            }
+
+            .header h1 {
+                font-size: 1.8em; /* Adjust font size */
+            }
+
+            .header h2 {
+                font-size: 1.0em; /* Adjust font size */
+            }
+
+            /* Dropdown Menu Styles */
+            .menu {
+                display: none; /* Hidden by default */
+                flex-direction: column;
+                align-items: flex-start;
+                position: absolute;
+                margin-top: 50px;
+                top: 40px; /* Adjust based on your layout */
+                left: 0;
+                background-color: #f8f8f8;
+                width: 100%;
+                order: 3;
+            }
+
+            .menu-icon {
+                display: block; /* Show menu icon */
+                position: fixed;
+                top: 0;
+                left: 0;
+                font-size: 27px;
+                padding: 5px;
+                cursor: pointer;
+                z-index: 1100;
+            }
+
+            /* Highlight for current page on mobile */
+            .menu a.current-page {
+                background-color: #e7e7e7; /* highlight for mobile */
+                text-decoration: none;
+            }
+
+            body {
+                padding-top: 60px;
+            }
+
+            .image-text-container-one,
+            .image-text-container-two,
+            .text-right,
+            .text-left {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .image-text-container-one {
+                margin-bottom: 0;
+                margin-top: 0;
+            }
+
+            .image-left, .image-right,
+            .text-right, .text-left {
+                width: 90%;
+                max-width: 90%;
+                margin: 0; /* Remove any specific margins */
+                display: block;
+            }
+
+            .image-left, .image-right {
+                order: -1; /* Image left will come before text right */
+            }
+
+            .text-left {
+                order: 1; /* Text left will come after image right */
+            }
+
+            .image-left img {
+                max-width: 100%; /* Full width of the container */
+                margin-top: 0; /* space above the image */
+                margin-bottom: 20px; /* space below the image */
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .image-right img {
+                max-width: 100%; /* Full width of the container */
+                margin-top: 15px; /* space above the image */
+                margin-bottom: 20px; /* space below the image */
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .text-right, .text-left {
+                margin-top: 0;
+                margin-bottom: 0px;
+            }
+
+            .mobile-header {
+                display: inline;
+                text-align: center;
+                order: -2;
+                height: 50px;
+                line-height: 50px;
+                margin-top: 0;
+                margin-bottom: 0;
+                background: #fff
+            }
+
+            .mobile-header h1 {
+                font-size: 1.5em;
+                margin: 0;
+            }
+
+            .mobile-header,
+            .menu {
+                position: fixed; /* Stay in place while scrolling */
+                top: 0; /* Align to the top of the screen */
+                width: 100%; /* Take up full screen width */
+                z-index: 1000; /* Ensure it stays on top of other content */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Container for flex items -->
+    <div class="container">
+        <!-- Responsive Menu Toggle for Mobile -->
+        <label for="menu-toggle" class="menu-icon" onclick="toggleMenu()">&#9776; </label>
+
+        <div class="mobile-header">
+            <h1>N+E</h1>
+        </div>
+
+        <div class="header">
+            <h1>Nikki + Evan</h1>
+            <h2>April 26th & 27th, 2024</h2>
+            <h2>Brooklyn, NY</h2>
+        </div>
+
+        <nav class="menu">
+            <a href="home.html">N+E</a>
+            <a href="wedding.html">Wedding</a>
+            <a href="travel.html" class="current-page">Travel</a>
+            <a href="rsvp.html">RSVP</a>
+            <a href="gifts.html">Gifts</a>
+        </nav>
+
+        <!-- New section for additional image and text -->
+        <!-- First image and text container -->
+        <div class="image-text-container-one">
+            <div class="image-left">
+                <img src="nikkievan_firstdate.jpg" alt="Nikki and Evan">
+            </div>
+            <div class="text-right">
+                <h2>Place des Fêtes</h2>
+                <p>This is within walking distance of the Classon Ave G train stop and the Franklin Ave C train stop. Street parking is good but not great. You’ll probably find a parking spot if you drive, but we’d recommend taking public transit or an Uber/Lyft/taxi so that you don’t have to worry about it and can get home safely after eating and drinking.</p>
+            </div>
+        </div>
+        <!-- Second image and text container -->
+        <div class="image-text-container-two">
+            <div class="text-left">
+                <h2>Strong Rope Brewery</h2>
+                <p>While you can technically get here via public transit using a subway-bus combo, it’ll be easiest to get an Uber/Lyft/taxi. There is not a dedicated parking lot, so if you decide to drive, you’ll rely on street parking.</p>
+            </div>
+            <div class="image-right">
+                <img src="nikkievan_niagarafalls.JPG" alt="Nikki and Evan">
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to handle menu toggling -->
+    <script>
+        function toggleMenu() {
+            var menu = document.querySelector('.menu');
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'flex';
+            }
+        }
+    </script>
+</body>
+</html>
